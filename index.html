@@ -1,25 +1,44 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <title>OTT App with Conviva DPI</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <title>Conviva HLS Player with DPI Network Tracking</title>
+
+  <!-- Conviva Network Collector (required for DPI network request visibility) -->
+  <script src="https://cdn.jsdelivr.net/npm/@convivainc/network-collector@latest/dist/networkCollector.min.js"></script>
+
+  <!-- AppTracker Bootstrapping -->
+  <script type="text/javascript">
+    (function(p, i) {
+        if (!p[i]) {
+            p.GlobalConvivaNamespace = p.GlobalConvivaNamespace || [];
+            p.GlobalConvivaNamespace.push(i);
+            p[i] = function() {
+                (p[i].q = p[i].q || []).push(arguments)
+            };
+            p[i].q = p[i].q || [];
+        }
+    }(window, "apptracker"));
+  </script>
+  <script src="convivaAppTracker.js"></script>
+</head>
+<body>
+  <h2>Conviva HLS Player with DPI Tracking</h2>
+
+  <video id="videoPlayer" width="640" height="360" controls>
+    <source src="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8" type="application/x-mpegURL">
+    Your browser does not support video playback.
+  </video>
+
+  <!-- HLS.js Library -->
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+  <!-- Conviva Video Sensor SDKs -->
   <script src="conviva-core-sdk.js"></script>
   <script src="conviva-html5native-impl.js"></script>
-</head>
-<body class="bg-gray-900 text-white">
-  <header class="p-4 bg-gray-800">
-    <h1>🎬 My OTT App + Conviva DPI</h1>
-  </header>
-  <main class="p-6">
-    <video id="videoPlayer" controls preload="auto" class="w-full max-w-4xl mx-auto"
-      poster="https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217">
-      <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-              type="video/mp4">
-      Your browser doesn’t support HTML5 video.
-    </video>
-  </main>
-  <script src="conviva-video-sensor.js"></script>
+
+  <!-- Custom Player Logic -->
   <script src="player.js"></script>
 </body>
 </html>
