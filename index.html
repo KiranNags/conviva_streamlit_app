@@ -19,43 +19,7 @@
       Your browser doesn’t support HTML5 video.
     </video>
   </main>
-  <script>
-    const CUSTOMER_KEY = 'af65934b0b34dd0b9a740f85f79b4b9d9f013a65';
-    const GATEWAY_URL = 'https://af65934b0b34dd0b9a740f85f79b4b9d9f013a65.ts-testonly.conviva.com';
-
-    window.Conviva = {
-      Client: function (config) {
-        console.log('Conviva Client initialized', config);
-        return {
-          log: console.log,
-        };
-      },
-      Html5Module: function (client) {
-        return {
-          initModuleWithPlayer: function (videoElement, metadata) {
-            console.log('Conviva HTML5 Module attached to player:', metadata);
-            videoElement.addEventListener('play', () => console.log('Play event sent to Conviva'));
-            videoElement.addEventListener('pause', () => console.log('Pause event sent to Conviva'));
-            videoElement.addEventListener('ended', () => console.log('Session ended, cleanup'));
-          }
-        };
-      }
-    };
-
-    const convivaClient = new Conviva.Client({
-      customerKey: CUSTOMER_KEY,
-      gatewayUrl: GATEWAY_URL,
-      debug: true
-    });
-
-    const html5Module = new Conviva.Html5Module(convivaClient);
-    const playerElem = document.getElementById('videoPlayer');
-    html5Module.initModuleWithPlayer(playerElem, {
-      assetName: 'Big Buck Bunny',
-      streamUrl: playerElem.currentSrc,
-      streamType: 'VOD',
-      applicationName: 'My OTT App Web'
-    });
-  </script>
+  <script src="conviva-video-sensor.js"></script>
+  <script src="player.js"></script>
 </body>
 </html>
