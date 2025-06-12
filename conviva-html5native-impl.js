@@ -1,0 +1,1 @@
+// Conviva HTML5 SDK placeholder
